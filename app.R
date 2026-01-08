@@ -1,4 +1,5 @@
-library(dplyr)
+# library(dplyr)
+library(bslib)
 library(shiny)
 source('pairs_engine/module.R')
 
@@ -10,13 +11,9 @@ app_title <- HTML(paste0(
 ))
 
 ui <- page_fillable(
-  shinyjs::useShinyjs(),
-  rclipboard::rclipboardSetup(),
   title = tab_title,
   titlePanel(app_title),
   tags$head(tags$link( rel = "stylesheet", type = "text/css", href = "style.css")),
-
-
 
       layout_columns(
         card(
@@ -101,14 +98,14 @@ server <- function(input, output, session) {
 
   updateAttendanceOptionsTriggerFile <- observe({
     req( input$class_history_file$datapath)
-    print("updateAttendanceOptions 1a")
+    # print("updateAttendanceOptions 1a")
     pairMaker()$load_history_from_file(input$class_history_file$datapath, input$class_history_file$name)
     updateAttendanceOptions()
   })
 
   updateAttendanceOptionsTriggerText <- observe({
     req( input$createClassroomFromCopyPastedNames)
-    print("updateAttendanceOptions 1b")
+    # print("updateAttendanceOptions 1b")
     pairMaker()$innitialise_class(input$pasteStudentNames)
     updateAttendanceOptions()
   })
@@ -116,7 +113,7 @@ server <- function(input, output, session) {
 
   updateAttendanceOptions <- function(){
     all_potential_attendees <- pairMaker()$get_all_potential_attendees()
-    print("updateAttendanceOptions 3")
+    # print("updateAttendanceOptions 3")
     updateCheckboxGroupInput(session, "checkboxes_with_attendance",
                              choices = all_potential_attendees,
                              selected = c()
@@ -132,11 +129,11 @@ server <- function(input, output, session) {
 
 
   createNewPairs <- observe({
-    print("make_groups_from_attendance 1")
+    # print("make_groups_from_attendance 1")
     req(input$make_groups_from_attendance) # react to button pressed
     if(!is.null(input$checkboxes_with_attendance)){
       new_pairs <- pairMaker()$make_pairs_for_session(input$checkboxes_with_attendance, input$name_of_session, group_size = input$groupSize)
-      print("make_groups_from_attendance 3")
+      # print("make_groups_from_attendance 3")
     }
   })
 
@@ -155,7 +152,7 @@ server <- function(input, output, session) {
 
   output$generated_groups_for_session <- renderTable({
     req(input$make_groups_from_attendance) # react to button pressed
-    invalidateLater(2000)
+    invalidateLater(3000)
 #     UGH! TODO. this is a nasty hack. make it properly by making hostory reactive within the object
     pairMaker()$most_recent_candidate
   })

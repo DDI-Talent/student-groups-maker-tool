@@ -33,8 +33,8 @@ PairMaker <- R6::R6Class("PairMaker",
                              history_operations$save_history_in_file(self$history, new_filename)
                            },
                            get_all_potential_attendees = function(){
-                             print("get_all_potential_attendees")
-                             print(self$history)
+                             # print("get_all_potential_attendees")
+                             # print(self$history)
                              self$history$person %>% unique() %>% sort()
                            },
                            innitialise_class = function(attendees_string){
@@ -47,13 +47,13 @@ PairMaker <- R6::R6Class("PairMaker",
                                session_name = "ClassSetup",
                                how_many_alternatives = 1
                              )
-                             print("innitialise_class1")
-                             print(self$history)
+                             # print("innitialise_class1")
+                             # print(self$history)
                              self$filename <- "NewClass"
                            },
                            make_pairs_for_session = function(attendees, session_name, group_size = 2, how_many_alternatives = 10){
-                             print("make_pairs_for_session")
-                             print(attendees)
+                             # print("make_pairs_for_session")
+                             # print(attendees)
                              self$most_recent_candidate <- scenarios_operations$run_one_lab(
                                attendees,
                                group_size = group_size,

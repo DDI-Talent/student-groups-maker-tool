@@ -54,7 +54,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
       ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-      
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -64,7 +64,7 @@ jobs:
         with:
           r-version: '4.5.1'
           use-public-rspm: true
-          
+
       - name: Dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
@@ -74,8 +74,8 @@ jobs:
             any::dplyr
             any::tidyr
             any::shiny
-            any::shinyjs
-            any::rclipboard
+            any::bslib
+            any::R6
 
       - name: rsconnect
         env:

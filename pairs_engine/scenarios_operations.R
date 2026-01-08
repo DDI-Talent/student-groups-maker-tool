@@ -1,13 +1,13 @@
 scenarios_operations <- list(
   run_one_lab = function( people, group_size, history_until_now, session_name, how_many_alternatives = 50 ){
-    print("run_one_lab 1")
-    print(people)
+    # print("run_one_lab 1")
+    # print(people)
     cands_this_week <- scenarios_operations$find_fittest_pairs(people = people,
                                           group_size = group_size,
                                           session_name = session_name,
                                           how_many_alternatives = how_many_alternatives,
                                           history_until_now=history_until_now)
-    print("run_one_lab 2")
+    # print("run_one_lab 2")
 
     cands_this_week
     # history_until_now
@@ -38,16 +38,16 @@ scenarios_operations <- list(
     history_until_now
   },
   find_fittest_pairs = function(people, group_size = 2, session_name = "session_", how_many_alternatives = 10, history_until_now){
-    print("find_fittest_pairs 1")
+    # print("find_fittest_pairs 1")
 
     parallell_universes <- history_operations$empty_history()
     print("find_fittest_pairs 2")
     time_now_string <- format(Sys.time(), "%Y-%m-%d--%H:%M:%S")
 
     for (alternative in 1:how_many_alternatives) {
-      print("alternative")
-      print(alternative)
-      print(people)
+      # print("alternative")
+      # print(alternative)
+      # print(people)
       cands_for_session <- pairs_operations$make_pairs_long(people, group_size = group_size, session_name = session_name)
       fitness_of_this_cand <- fitness(cands_for_session, history_until_now)
       cands_for_session <- cands_for_session |>
