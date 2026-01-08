@@ -54,10 +54,13 @@ jobs:
           SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET_DDI_TALENT }}
         run: |
           Rscript -e "
-            rsconnect::deployApp(
-              appDir = '.',
-              appName = 'pair-up',
-              server = 'shinyapps.io',
-              forceUpdate = TRUE
-            )
-          "
+                options(
+                  repos = c(CRAN = 'https://cloud.r-project.org')
+                );
+                rsconnect::deployApp(
+                  appDir = '.',
+                  appName = 'NEED_PROD_APP_ID',
+                  server = 'shinyapps.io',
+                  forceUpdate = TRUE
+                )
+              "
