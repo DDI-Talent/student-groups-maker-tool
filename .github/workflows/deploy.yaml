@@ -70,6 +70,7 @@ jobs:
         with:
           cache-version: 3 # increase this number if github actions require some old packages - it means 'needing' them is remembered in cache
           packages: |
+            any::cpp11
             any::rsconnect
             any::dplyr
             any::tidyr
