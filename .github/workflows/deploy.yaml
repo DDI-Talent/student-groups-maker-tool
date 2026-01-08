@@ -5,49 +5,6 @@ on:
     branches: [ main ]
 
 jobs:
-  # deploy-development:
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
-
-  #     - name: Set up R
-  #       uses: r-lib/actions/setup-r@v2
-  #       with:
-  #         r-version: '4.5.1'
-  #         use-public-rspm: true
-
-  #     - name: Install system dependencies
-  #       run: |
-  #         sudo apt-get update
-  #         sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
-
-  #     - name: Install R dependencies
-  #       run: |
-  #         Rscript -e "
-  #         if (!require('pak')) install.packages('pak', repos = 'https://r-lib.github.io/p/pak/dev/')
-  #         pak::pkg_install(c('rsconnect', 'dplyr', 'tidyr', 'shiny', 'shinyjs', 'rclipboard'))
-  #         "
-
-  #     - name: Install rsconnect CLI
-  #       run: |
-  #         curl -s https://posit.co/download/latest/rsconnect-cli/linux -o rsconnect
-  #         chmod +x rsconnect
-  #         sudo mv rsconnect /usr/local/bin/rsconnect
-
-  #     - name: Deploy to shinyapps.io (Development)
-  #       env:
-  #         SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN_DDI_TALENT }}
-  #         SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET_DDI_TALENT }}
-  #       run: |
-  #         rsconnect deploy shiny ./ \
-  #         --account ddi-talent \
-  #         --server shinyapps.io \
-  #         --token $SHINYAPPS_TOKEN \
-  #         --secret $SHINYAPPS_SECRET \
-  #         -a 15186044 --pair-up
-
   deploy-main:
     runs-on: ubuntu-latest
 
@@ -70,7 +27,6 @@ jobs:
         with:
           cache-version: 3 # increase this number if github actions require some old packages - it means 'needing' them is remembered in cache
           packages: |
-            any::cpp11
             any::rsconnect
             any::dplyr
             any::tidyr
