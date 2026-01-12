@@ -4,6 +4,7 @@ library(magrittr)
 library(tibble)
 library(dplyr)
 library(tidyr)
+library(cpp11)
 
 # TODO: should this me dependancy injection instead?
 source('./pairs_engine/matrix_operations.R')
