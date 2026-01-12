@@ -1,9 +1,4 @@
-library(R6)
-# install.packages("magrittr")
-library(magrittr)
-library(tibble)
-library(dplyr)
-library(tidyr)
+
 
 # TODO: should this me dependancy injection instead?
 source('./pairs_engine/matrix_operations.R')
