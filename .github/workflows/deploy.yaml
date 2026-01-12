@@ -29,6 +29,7 @@ jobs:
           packages: |
             any::rsconnect
             any::dplyr
+            any::cpp11
             any::tidyr
             any::shiny
             any::bslib
