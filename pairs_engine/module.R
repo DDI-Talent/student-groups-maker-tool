@@ -3,6 +3,7 @@ library(R6)
 library(magrittr)
 library(tibble)
 library(dplyr)
+library(tidyr)
 
 # TODO: should this me dependancy injection instead?
 source('./pairs_engine/matrix_operations.R')
