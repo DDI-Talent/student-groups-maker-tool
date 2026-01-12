@@ -11,6 +11,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
       ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      RSPM: ""
 
     steps:
       - name: Checkout code
