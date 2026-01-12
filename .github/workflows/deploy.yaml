@@ -34,7 +34,7 @@ jobs:
             any::bslib
             any::R6
 
-      - name: rsconnect
+      - name: rsconnect account
         env:
           SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN_DDI_TALENT }}
           SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET_DDI_TALENT }}
