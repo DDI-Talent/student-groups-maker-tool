@@ -59,7 +59,7 @@ jobs:
                   forceUpdate = TRUE,
                   account = 'ddi-talent',
                   envManagement = TRUE,
-                  appId = '16414069'
+                  appId = '16414069',
                   launch.browser=FALSE
                 )
               "
