@@ -65,6 +65,7 @@ jobs:
                   appName = 'pair-up',
                   server = 'shinyapps.io',
                   account = 'ddi-talent',
-                  forceUpdate = TRUE
+                  forceUpdate = TRUE,
+                  appId = '15186044'
                 )
               "
