@@ -25,7 +25,7 @@ jobs:
       - name: Dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          cache-version: 8 # increase this number if github actions require some old packages - it means 'needing' them is remembered in cache
+          cache-version: 9 # increase this number if github actions require some old packages - it means 'needing' them is remembered in cache
           packages: |
             any::rsconnect
             any::shiny
