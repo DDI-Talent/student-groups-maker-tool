@@ -23,11 +23,6 @@ jobs:
           r-version: '4.5.1'
           use-public-rspm: true
 
-      - name: Force CRAN mirror. #This is to avoid cpp11 crn misconfuguration drama
-        run: |
-          echo 'options(repos = c(CRAN = "https://cloud.r-project.org"))' >> ~/.Rprofile
-
-
       - name: Dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:

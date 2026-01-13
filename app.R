@@ -1,9 +1,5 @@
-options(
-  repos = c(CRAN = "https://cloud.r-project.org")
-)
 library(bslib)
 library(shiny)
-# library(cpp11) # leave this here,  otherwise it does not get bundled and github actions fail
 library(R6)
 library(magrittr)
 library(tibble)
