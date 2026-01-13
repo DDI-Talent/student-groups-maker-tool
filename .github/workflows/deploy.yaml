@@ -20,7 +20,7 @@ jobs:
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: '4.5.2'
-          use-public-rspm: true
+          use-public-rspm: false
 
       - name: Dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
@@ -48,8 +48,9 @@ jobs:
         env:
           SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN_DDI_TALENT }}
           SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET_DDI_TALENT }}
+          NOT_CRAN: false
+
         run: |
-          options(repos = c(CRAN = "https://cloud.r-project.org"))
           Rscript -e "
                 rsconnect::deployApp(
                   appDir = '.',
