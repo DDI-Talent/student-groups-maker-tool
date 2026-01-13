@@ -49,6 +49,7 @@ jobs:
           SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN_DDI_TALENT }}
           SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET_DDI_TALENT }}
         run: |
+          options(repos = c(CRAN = "https://cloud.r-project.org"))
           Rscript -e "
                 rsconnect::deployApp(
                   appDir = '.',
