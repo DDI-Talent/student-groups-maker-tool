@@ -55,11 +55,14 @@ jobs:
           Rscript -e "
                 rsconnect::deployApp(
                   appDir = Sys.getenv('FOLDER'),
-                  appName = 'pair-up-testing',
                   server = 'shinyapps.io',
                   forceUpdate = TRUE,
                   account = 'ddi-talent',
                   envManagement = TRUE,
+                  appId = '16414069'
                   launch.browser=FALSE
                 )
               "
+
+                                # appName = 'pair-up-testing', (16414069)
+

@@ -1,4 +1,9 @@
-library(shiny)
+# library(shiny)
+
+if(!require(shiny)){
+  install.packages("shiny")
+  library(shiny)
+}
 
 tab_title <- 'Pair programming pairing app '
 app_version <- '0.5.0'
