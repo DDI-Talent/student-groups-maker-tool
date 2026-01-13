@@ -51,7 +51,7 @@ jobs:
         run: |
           Rscript -e "
                 rsconnect::deployApp(
-                  appDir = '',
+                  appDir = '.',
                   appName = 'pair-up-testing',
                   server = 'shinyapps.io',
                   forceUpdate = TRUE,
