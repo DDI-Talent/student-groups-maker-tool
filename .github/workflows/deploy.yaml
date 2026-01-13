@@ -49,15 +49,17 @@ jobs:
           SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN_DDI_TALENT }}
           SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET_DDI_TALENT }}
           NOT_CRAN: false
+          FOLDER: ${{ github.workspace }}
 
         run: |
           Rscript -e "
                 rsconnect::deployApp(
-                  appDir = '.',
+                  appDir = Sys.getenv('FOLDER'),
                   appName = 'pair-up-testing',
                   server = 'shinyapps.io',
                   forceUpdate = TRUE,
                   account = 'ddi-talent',
+                  envManagement = TRUE,
                   launch.browser=FALSE
                 )
               "
