@@ -1,68 +1,68 @@
-name: Deploy Shiny App on PR to Development or Main Branch
-
-on:
-  push:
-    branches: [ main ]
-
-jobs:
-  deploy-main:
-    runs-on: ubuntu-latest
-
-    env:
-      GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
-      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up R
-        uses: r-lib/actions/setup-r@v2
-        with:
-          r-version: '4.5.2'
-          use-public-rspm: false
-
-      - name: Dependencies
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          cache-version: 9 # increase this number if github actions require some old packages - it means 'needing' them is remembered in cache
-          packages: |
-            any::rsconnect
-            any::shiny
-
-
-      - name: rsconnect  account
-        env:
-          SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN_DDI_TALENT }}
-          SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET_DDI_TALENT }}
-        run: |
-          Rscript -e "
-            rsconnect::setAccountInfo(
-              name   = 'ddi-talent',
-              token  = Sys.getenv('SHINYAPPS_TOKEN'),
-              secret = Sys.getenv('SHINYAPPS_SECRET')
-            );
-          "
-
-      - name: rsconnect deploy
-        env:
-          SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN_DDI_TALENT }}
-          SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET_DDI_TALENT }}
-          NOT_CRAN: false
-          FOLDER: ${{ github.workspace }}
-
-        run: |
-          Rscript -e "
-                rsconnect::deployApp(
-                  appDir = Sys.getenv('FOLDER'),
-                  server = 'shinyapps.io',
-                  forceUpdate = TRUE,
-                  account = 'ddi-talent',
-                  envManagement = TRUE,
-                  appId = '16414069',
-                  launch.browser=FALSE
-                )
-              "
-
-                                # appName = 'pair-up-testing', (16414069)
-
+# name: Deploy Shiny App on PR to Development or Main Branch
+#
+# on:
+#   push:
+#     branches: [ main ]
+#
+# jobs:
+#   deploy-main:
+#     runs-on: ubuntu-latest
+#
+#     env:
+#       GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
+#       ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+#
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+#
+#       - name: Set up R
+#         uses: r-lib/actions/setup-r@v2
+#         with:
+#           r-version: '4.5.2'
+#           use-public-rspm: false
+#
+#       - name: Dependencies
+#         uses: r-lib/actions/setup-r-dependencies@v2
+#         with:
+#           cache-version: 9 # increase this number if github actions require some old packages - it means 'needing' them is remembered in cache
+#           packages: |
+#             any::rsconnect
+#             any::shiny
+#
+#
+#       - name: rsconnect  account
+#         env:
+#           SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN_DDI_TALENT }}
+#           SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET_DDI_TALENT }}
+#         run: |
+#           Rscript -e "
+#             rsconnect::setAccountInfo(
+#               name   = 'ddi-talent',
+#               token  = Sys.getenv('SHINYAPPS_TOKEN'),
+#               secret = Sys.getenv('SHINYAPPS_SECRET')
+#             );
+#           "
+#
+#       - name: rsconnect deploy
+#         env:
+#           SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN_DDI_TALENT }}
+#           SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET_DDI_TALENT }}
+#           NOT_CRAN: false
+#           FOLDER: ${{ github.workspace }}
+#
+#         run: |
+#           Rscript -e "
+#                 rsconnect::deployApp(
+#                   appDir = Sys.getenv('FOLDER'),
+#                   server = 'shinyapps.io',
+#                   forceUpdate = TRUE,
+#                   account = 'ddi-talent',
+#                   envManagement = TRUE,
+#                   appId = '16414069',
+#                   launch.browser=FALSE
+#                 )
+#               "
+#
+#                                 # appName = 'pair-up-testing', (16414069)
+#
