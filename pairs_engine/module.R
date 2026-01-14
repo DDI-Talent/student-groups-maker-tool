@@ -3,6 +3,8 @@ library(R6)
 library(magrittr)
 library(tibble)
 library(dplyr)
+library(shiny)
+library(bslib)
 
 # TODO: should this me dependancy injection instead?
 source('./pairs_engine/matrix_operations.R')
@@ -23,6 +25,7 @@ PairMaker <- R6::R6Class("PairMaker",
                            initialize = function(history = history_operations$empty_history(), filename = NA) {
                              self$history <- history
                              self$filename <- filename
+                             self$most_recent_candidate <- reactiveVal(NA)
                            },
                            load_history_from_file = function(fileLocation, fileNameString){
                              self$filename <- fileNameString
@@ -48,29 +51,30 @@ PairMaker <- R6::R6Class("PairMaker",
                              )
                              print("innitialise_class1")
                              print(self$history)
-                             self$filename <- "NewClass"
+                             self$filename <- "NewClass.csv"
                            },
-                           make_pairs_for_session = function(attendees, session_name, group_size = 2, how_many_alternatives = 100){
+                           make_pairs_for_session = function(attendees, session_name, group_size = 2, how_many_alternatives = 10){
                              print("make_pairs_for_session")
                              print(attendees)
-                             self$most_recent_candidate <- scenarios_operations$run_one_lab(
+                             newMostRecentCandidate <- scenarios_operations$run_one_lab(
                                attendees,
                                group_size = group_size,
                                history_until_now = self$history,
                                session_name = session_name,
                                how_many_alternatives = how_many_alternatives
                              )
-                             self$most_recent_candidate # can we get away without returning this?
+                             self$most_recent_candidate(newMostRecentCandidate)
+                             # self$most_recent_candidate() # can we get away without returning this?
                            },
                            approve_most_recent_groups_candidate = function(){
-                             history_with_new_froups <- history_operations$combine_histories( self$most_recent_candidate, self$history)
+                             history_with_new_froups <- history_operations$combine_histories( self$most_recent_candidate(), self$history)
                              self$history <- history_with_new_froups
                            },
                            getMostRecentCandidate = function(simplified = FALSE){
                              if (simplified){
-                               self$most_recent_candidate %>% select(c("person","group_id"))
+                               self$most_recent_candidate() %>% select(c("person","group_id"))
                              }else{
-                               self$most_recent_candidate
+                               self$most_recent_candidate()
                              }
                            }
                          ),

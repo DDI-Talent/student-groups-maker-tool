@@ -7,7 +7,7 @@ source(here::here('pairs_engine', 'module.R'))
 
 
 tab_title <- 'Pair programming pairing app '
-app_version <- '0.5.01'
+app_version <- '0.5.03'
 app_title <- HTML(paste0(
   tab_title,
   span(paste0('v', app_version), style = 'font-size: .5em; color: #9B59B6')
@@ -76,7 +76,7 @@ server <- function(input, output, session) {
 
   output$accept_and_download_button <- renderUI({
     req(input$make_groups_from_attendance)
-    hideDownloadButton <- is.null(pairMaker()$most_recent_candidate)
+    hideDownloadButton <- is.null(pairMaker()$most_recent_candidate())
     if(hideDownloadButton){
       div()
     }else{
@@ -155,7 +155,9 @@ server <- function(input, output, session) {
 
   output$generated_groups_for_session <- renderTable({
     req(input$make_groups_from_attendance) # react to button pressed
-    invalidateLater(3000)
+    req( pairMaker()$most_recent_candidate )
+
+    # invalidateLater(3000)
 #     UGH! TODO. this is a nasty hack. make it properly by making hostory reactive within the object
     pairMaker()$getMostRecentCandidate(simplified = input$simplifiedPairsDisplay)
   })
