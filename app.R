@@ -7,7 +7,7 @@ source(here::here('pairs_engine', 'Pair_maker.R'))
 
 
 tab_title <- 'Pairs Maker: Pair Programming & Groupwork'
-app_version <- '0.6.1'
+app_version <- '0.6.7'
 app_title <- HTML(paste0(
   tab_title,
   span(paste0('v', app_version), style = 'font-size: .5em; color: #9B59B6')
@@ -113,10 +113,15 @@ server <- function(input, output, session) {
 
   updateSessionName <- observe({
     req(input$class_history_file$datapath)
-    updateTextInput(session, "name_of_session",
-                             value = history_operations$session_name_with_format("unnamed-session")
-    )
+    update_session_name()
   })
+
+  update_session_name <- function(){
+    updateTextInput(session, "name_of_session",
+                    value = history_operations$session_name_with_format("unnamed-session")
+    )
+  }
+
 
   createNewPairs <- observeEvent(
     input$make_groups_from_attendance,
@@ -134,11 +139,19 @@ server <- function(input, output, session) {
 
   output$accept_groups_for_session <- downloadHandler(
     filename = function() {
+      print("pair_maker$filename")
+      print(pair_maker$filename)
       pair_maker$filename
     },
     content = function(connection_to_downloaded_file) {
+      update_session_name()
       pair_maker$approve_most_recent_groups_candidate()
       pair_maker$save_history_to_file(connection_to_downloaded_file)
+      # write.csv(history_to_save, filename, row.names = FALSE)
+
+      # print("connection_to_downloaded_file")
+      # print(connection_to_downloaded_file)
+      # write.csv(pair_maker$history, connection_to_downloaded_file, row.names = FALSE)
     }
   )
  }
