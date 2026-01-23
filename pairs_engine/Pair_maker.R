@@ -11,6 +11,7 @@ source('./pairs_engine/matrix_operations.R')
 source('./pairs_engine/pairs_operations.R')
 source('./pairs_engine/history_operations.R')
 source('./pairs_engine/scenarios_operations.R')
+source('./pairs_engine/fitness_operations.R')
 
 Pair_maker <- R6::R6Class("Pair_maker",
                          public = list(

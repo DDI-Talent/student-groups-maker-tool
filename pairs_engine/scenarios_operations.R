@@ -31,7 +31,7 @@ scenarios_operations <- list(
 
     for (alternative in 1:how_many_alternatives) {
       cands_for_session <- pairs_operations$make_pairs_long(people, group_size = group_size, session_name = session_name)
-      fitness_of_this_cand <- fitness(cands_for_session, history_until_now)
+      fitness_of_this_cand <- fitness_operations$fitness(cands_for_session, history_until_now)
       cands_for_session <- cands_for_session |>
         mutate(fitness = fitness_of_this_cand$total_penalty) |>
         mutate(alternative = alternative) |>
