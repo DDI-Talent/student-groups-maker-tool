@@ -1,7 +1,5 @@
 pairs_operations <- list(
   make_pairs_long = function(people, group_size = 2, session_name = paste0(sample(10000, 1))) {
-    print("make_pairs_long")
-    print(people)
     pool_idx <- seq_along(people)
     number_of_groups <- length(people) %/% group_size
     group_names <- rep(seq_len(number_of_groups), times = group_size + 100)

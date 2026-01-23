@@ -16,7 +16,7 @@ history_operations <- list(
                                 person = attendees)
     history_for_class
   },
-  attendeesFromString = function(attendees_string){
+  attendees_from_string = function(attendees_string){
     #   split by , and then remove whitespaces around
     attendees_string |> strsplit(",") |> unlist() |> trimws() |> unique()
   },
@@ -39,7 +39,7 @@ history_operations <- list(
 
 )
 
-
+# TODO: cleanup tests
 # cands1 <- make_pairs_long(people = letters[1:5], group_size = 2)
 # cands2 <- make_pairs_long(people = letters[1:5], group_size = 2)
 # combine_histories(cands1,cands2)
