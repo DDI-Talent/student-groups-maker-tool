@@ -51,6 +51,7 @@ Pair_maker <- R6::R6Class("Pair_maker",
                                how_many_alternatives = 1
                              )
                              self$history <- history_operations$combine_histories(self$history, fake_session_to_add_students)
+                             self$filename <- if(is.na(self$filename)) "new_class.csv" else self$filename
 
                            },
                            make_pairs_for_session = function(attendees, session_name, group_size = 2, how_many_alternatives = 10){
